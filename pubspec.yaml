@@ -39,12 +39,12 @@ dependencies:
   go_router: 12.1.1
   equatable: 2.0.5
   firebase_core: 2.22.0
-  firebase_auth: 4.14.0
-  firebase_ui_auth: 1.10.0
-  cloud_firestore: 4.13.1
-  faker: 2.1.0
-  firebase_ui_firestore: 1.5.14
-  cloud_functions: 4.5.4
+  # firebase_auth: 4.14.0
+  # firebase_ui_auth: 1.10.0
+  # cloud_firestore: 4.13.1
+  # faker: 2.1.0
+  # firebase_ui_firestore: 1.5.14
+  # cloud_functions: 4.5.4
 
 dev_dependencies:
   flutter_test:
