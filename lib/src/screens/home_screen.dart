@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:faker/faker.dart';
+import 'package:firebase_ui_firestore/firebase_ui_firestore.dart';
 import 'package:flutter_firebase_playground/src/data/firestore_repository.dart';
 
 import '/src/routing/app_router.dart';
@@ -18,6 +20,7 @@ class HomeScreen extends ConsumerWidget {
           onPressed: () => context.goNamed(AppRoute.profile.name),
         )
       ]),
+      body: const JobsListView(),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
         onPressed: () {
@@ -32,6 +35,25 @@ class HomeScreen extends ConsumerWidget {
               );
         },
       ),
+    );
+  }
+}
+
+class JobsListView extends ConsumerWidget {
+  const JobsListView({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final firestoreRepository = ref.watch(firestoreRepositoryProvider);
+    return FirestoreListView(
+      query: firestoreRepository.jobsQuery(),
+      itemBuilder: (BuildContext context,
+          QueryDocumentSnapshot<Map<String, dynamic>> doc) {
+        return ListTile(
+          title: Text(doc['title']),
+          subtitle: Text(doc['company']),
+        );
+      },
     );
   }
 }
