@@ -1,3 +1,4 @@
+import 'package:faker/faker.dart';
 import 'package:flutter_firebase_playground/src/data/firestore_repository.dart';
 
 import '/src/routing/app_router.dart';
@@ -21,10 +22,13 @@ class HomeScreen extends ConsumerWidget {
         child: const Icon(Icons.add),
         onPressed: () {
           final user = ref.read(firebaseAuthProvider).currentUser;
+          final faker = Faker();
+          final title = faker.job.title();
+          final company = faker.company.name();
           ref.read(firestoreRepositoryProvider).addJob(
                 user!.uid,
-                'Chief Flutter Magician', // cool job title huh?
-                'Remote Async Working Limited', // even better company name
+                title,
+                company,
               );
         },
       ),
