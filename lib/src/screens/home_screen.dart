@@ -1,3 +1,5 @@
+import 'package:flutter_firebase_playground/src/data/firestore_repository.dart';
+
 import '/src/routing/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -18,7 +20,12 @@ class HomeScreen extends ConsumerWidget {
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
         onPressed: () {
-          debugPrint('Not implemented');
+          final user = ref.read(firebaseAuthProvider).currentUser;
+          ref.read(firestoreRepositoryProvider).addJob(
+                user!.uid,
+                'Chief Flutter Magician', // cool job title huh?
+                'Remote Async Working Limited', // even better company name
+              );
         },
       ),
     );
