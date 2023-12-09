@@ -1,8 +1,8 @@
+import '/src/routing/go_router_refresh_stream.dart';
+import '/src/screens/custom_profile_screen.dart';
+import '/src/screens/custom_sign_in_screen.dart';
+import '/src/screens/home_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_firebase_playground/src/routing/go_router_refresh_stream.dart';
-import 'package:flutter_firebase_playground/src/screens/custom_profile_screen.dart';
-import 'package:flutter_firebase_playground/src/screens/custom_sign_in_screen.dart';
-import 'package:flutter_firebase_playground/src/screens/home_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -28,7 +28,7 @@ final goRouterProvider = Provider<GoRouter>((ref) {
           return '/home';
         }
       } else {
-        if (state.uri.path.startsWith('/home') == '/home') {
+        if (state.uri.path.startsWith('/home')) {
           return '/sign-in';
         }
       }
@@ -42,16 +42,17 @@ final goRouterProvider = Provider<GoRouter>((ref) {
         builder: (context, state) => const CustomSignInScreen(),
       ),
       GoRoute(
-          path: '/home',
-          name: AppRoute.home.name,
-          builder: (context, state) => const HomeScreen(),
-          routes: [
-            GoRoute(
-              path: 'profile',
-              name: AppRoute.profile.name,
-              builder: (context, state) => const CustomProfileScreen(),
-            ),
-          ]),
+        path: '/home',
+        name: AppRoute.home.name,
+        builder: (context, state) => const HomeScreen(),
+        routes: [
+          GoRoute(
+            path: 'profile',
+            name: AppRoute.profile.name,
+            builder: (context, state) => const CustomProfileScreen(),
+          ),
+        ],
+      ),
     ],
   );
 });
