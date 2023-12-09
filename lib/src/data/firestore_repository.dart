@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_firebase_playground/src/data/job.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class FirestoreRepository {
@@ -16,8 +17,10 @@ class FirestoreRepository {
     debugPrint(docRef.id);
   }
 
-  Query<Map<String, dynamic>> jobsQuery() {
-    return _firestore.collection('jobs');
+  Query<Job> jobsQuery() {
+    return _firestore.collection('jobs').withConverter(
+        fromFirestore: (snapshot, _) => Job.fromMap(snapshot.data()!),
+        toFirestore: (job, _) => job.toMap());
   }
 }
 
